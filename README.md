@@ -51,8 +51,8 @@ All good test cases should adhere to the following rules, tests should be:
 
 it("should render two links", () => {
   const { cart } = setup();
-  expect(cart.find(Link)).to.have.length(2)
-})
+  expect(cart.find(Link)).to.have.length(2);
+});
 
 /**
   * Improved test cases
@@ -75,6 +75,7 @@ it("should link to the checkout page", () => {
 it("should link to the buy more page", () => {
   const { buyMoreLink } = setup();
   expect(buyMoreLink.getAttribute("href")).to.equal("/buy-more");
+});
 ````
 
 ### Outlining the contract
