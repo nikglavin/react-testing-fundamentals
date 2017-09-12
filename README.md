@@ -8,6 +8,22 @@ The amount of benefit I've seen by moving to a faster test suite is one of the m
 
 We can make good tests run fast but we can't make fast tests be good.
 
+## Testing React Components
+
+When you test React components, it is good to think about it from an outsider’s perspective, is this detail important, or is it only an internal concern? Can the effect of this internal detail be described using only the component’s public API?
+
+Elements that contribute to a components contract:
+
+- What it renders (which may be nothing)
+- Conditional Props
+- State / updating state
+- Test user events
+- Test the response to those events
+- Make sure the right things render at the right time
+- Component behavior when the user interacts with it (via clicking, dragging, keyboard input, etc)
+- What the component does when you call methods on its instance (public ref interface)
+- Side effects that occur as part of the component life cycle (componentDidMount, componentWillUnmount, etc)
+
 ## Types of testing
 
 A strong test suite is made up of multiple layers. Each layer should be able to be executed independently and deliver useful feedback when failure occurs.
@@ -99,32 +115,10 @@ it("should link to the buy more page", () => {
 });
 ````
 
-## What not to test
+### What makes a bad test case
 
-Will the test have to duplicate exactly the application code? This will make it brittle.
-
-Will making assertions in the test duplicate any behavior that is already covered by (and the responsibility of) library code?
-
-From an outsider’s perspective, is this detail important, or is it only an internal concern? Can the effect of this internal detail be described using only the component’s public API?
-
-## Testing React Components
-
-Elements that contribute to a components contract:
-
-When you test React components, there are at least two concerns that must be tested:
-Given properties and state, what structure our rendered tree will have?
-Given an output of render, is there a possibility to transition from state A to state B?
-Those two concerns have their own approaches to test them. I usually name the first concern as testing structure, and the second one as testing behavior. These concerns are separate, but some of testing structure approaches can affect available ways of testing behavior approaches.
-
-- What it renders (which may be nothing)
-- Conditional Props
-- State / updating state
-- Test user events
-- Test the response to those events
-- Make sure the right things render at the right time
-- Component behavior when the user interacts with it (via clicking, dragging, keyboard input, etc)
-- What the component does when you call methods on its instance (public ref interface)
-- Side effects that occur as part of the component life cycle (componentDidMount, componentWillUnmount, etc)
+- Duplicating exactly the application code? This will make it brittle.
+- Assertions in the test duplicate any behavior that is already covered by (and the responsibility of) library code?
 
 ## Snapshot testing
 
@@ -142,6 +136,10 @@ Those two concerns have their own approaches to test them. I usually name the fi
 - Human Intervention required to validate (anti-pattern known as Guru Checks Output)
 
 Tip with snapshots: You can force the snapshot order yourself if you need to by numbering them, this can make them easier to browse;
+
+## Functional Testing
+
+...
 
 ## Code Coverage Metrics
 
